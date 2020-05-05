@@ -14,7 +14,7 @@ leer en la ventana del lado derecho lo que ha generado el algoritmo, y del lado 
 
 ¿Cómo funciona?
 
-Las cadenas de markov parten de procesos aleatorios donde la probabilidad de que ocurra un evento depende solamente del estado inmediatamente anterior de un conjunto de valores. En las cadenas de primer orden el algoritmo toma como referencia la penúltima palabra para decidir cual le podría seguir partiendo de una selección aleatoria de palabras de acuerdo con la base de datos introducida. En cambio, las cadenas de tercer orden toman como referencia 3 palabras antes de seleccionar la siguiente. Dependiendo de la cantidad de palabras diferentes que le sigan a una palabra dada, será la probabilidad de aparición que se le asignará a las posibles palabras o grupo de palabras consecuentes.
+Las cadenas de markov deben su nombre al matemático Andréi Márkov y  parten de procesos aleatorios donde la probabilidad de que ocurra un evento depende solamente del estado inmediatamente anterior de un conjunto de valores. En las cadenas de primer orden el algoritmo toma como referencia la penúltima palabra para decidir cual le podría seguir partiendo de una selección aleatoria de palabras de acuerdo con la base de datos introducida. En cambio, las cadenas de tercer orden toman como referencia 3 palabras antes de seleccionar la siguiente. Dependiendo de la cantidad de palabras diferentes que le sigan a una palabra dada, será la probabilidad de aparición que se le asignará a las posibles palabras o grupo de palabras consecuentes.
 
 Referencias:
 https://setosa.io/ev/markov-chains/
