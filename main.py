@@ -18,41 +18,65 @@ import os
 import random
 from gtts import gTTS
 import os
-from playsound import playsound
 
-text = open('markovid_data.txt')
-words = []
+texto = open('markovid_data.txt')
+palabras = []
 
-for line in text:
-    line = line.replace('\r', ' ').replace('\n', ' ')
-    #line = line.replace('', ).replace(' ')
-    new_words = line.split(' ')
-    new_words = [word for word in new_words if word not in ['', ' ']]
-    words = words + new_words
+for lineas in texto:
+    lineas = lineas.replace('\r', ' ').replace('\n', ' ')
+    nuevas_palabras = lineas.split(' ')
+    nuevas_palabras = [palabra for palabra in nuevas_palabras if palabra not in ['', ' ']]
+    palabras = palabras + nuevas_palabras
 
-print('Corpus size: {0} words.'.format(len(words)))
+cadena = {}
+n_palabras = len(palabras)
 
-chain = {}
-n_words = len(words)
-
-for i, key in enumerate(words):
-    if n_words > (i + 1):
-        word = words[i + 1]
-        if key not in chain:
-            chain[key] = [word]
+for i, key in enumerate(palabras):
+    if n_palabras > (i + 1):
+        palabra = palabras[i + 1]
+        if key not in cadena:
+            cadena[key] = [palabra]
         else:
-            chain[key].append(word)
+            cadena[key].append(palabra)
 
-w1 = random.choice(words)
+w1 = random.choice(palabras)
 tweet = w1
 while len(tweet) < 350:
-    w2 = random.choice(chain[w1])
+    w2 = random.choice(cadena[w1])
     tweet += ' ' + w2
     w1 = w2
-print('\t', tweet)
 
-output = gTTS(text=tweet, lang=lang)
+print('Hay un Corpus de: ', str(n_palabras), ' palabras.', 'y un total de: ', str(len(cadena)), ' palabras diferentes.')
 
-output.save('./markovid-19.mp3')
+print('\n', 'Markovid-19 de primer orden')
+print('\n', tweet)
 
-#playsound("markovid-19.mp3")
+salida = gTTS(text=tweet, lang=lang)
+salida.save('./markovid-19_primer_orden.wav')
+
+#### Markovid-19 de segundo orden ####
+
+cadena = {}  
+n_words = len(palabras)  
+for i, key1 in enumerate(palabras):  
+    if n_words > i + 3:
+        key2 = palabras[i + 1]
+        key3 = palabras[i + 2]
+        palabra = palabras[i + 3]
+        if (key1, key2, key3) not in cadena:
+            cadena[(key1, key2, key3)] = [palabra]
+        else:
+            cadena[(key1, key2, key3)].append(palabra)            
+r = random.randint(0, len(palabras) - 1) 
+key = (palabras[r], palabras[r + 1], palabras[r + 2])
+tweet = key[0] + ' ' + key[1] + ' ' +  key[2]
+while len(tweet) < 300:  
+    w = random.choice(cadena[key])
+    tweet += (" " + w)
+    key = (key[1], key[2], w)
+
+print('\n', 'Markovid-19 de tercer orden')
+print('\n', tweet)
+
+salida = gTTS(text=tweet, lang=lang)
+salida.save('./markovid-19_tercer_orden.wav')
