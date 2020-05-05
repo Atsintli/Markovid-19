@@ -3,12 +3,21 @@
             Generador automático de contenidos sobre las 
           últimas noticias y reflexiones en torno al Covid-19 
 
-      Para correr el código presiona el ícono run o ctrl+enter(Windows, Linux) y cmd+enter(Mac).
+Instrucciones:
 
-      Espera a que se instalen las librerias requeridas, no te preocupes todo esto ocurre en un servidor web, nada se instalará en tu computadora.
+- Corre el código presionando el ícono run> o presiona ctrl+enter(Windows, Linux) y cmd+enter(Mac).
 
-      Una vez que se instalaron las librerias requeridas, podrás
-      leer en la ventana del lado derecho lo que ha generado el algoritmo, y del lado izquierdo estará el archivo "markovid-19.mp3" el cual podrás reproducir al darle click.  
+- Espera a que se instalen las librerias requeridas, no te preocupes todo esto ocurre en un servidor web, nada se instalará en tu computadora.
+
+- Una vez que se instalaron las librerías requeridas, podrás
+leer en la ventana del lado derecho lo que ha generado el algoritmo, y del lado izquierdo estará los archivos "markovid-19.wav" los cuales podrás reproducir al darles click.
+
+¿Cómo funciona?
+
+Las cadenas de markov parten de procesos aleatorios donde la probabilidad de que ocurra un evento depende solamente del estado inmediatamente anterior de un conjunto de valores. En las cadenas de primer orden el algoritmo toma como referencia la penúltima palabra para decidir cual le podría seguir partiendo de una selección aleatoria de palabras de acuerdo con la base de datos introducida. En cambio, las cadenas de tercer orden toman como referencia 3 palabras antes de seleccionar la siguiente. Dependiendo de la cantidad de palabras diferentes que le sigan a una palabra dada, será la probabilidad de aparición que se le asignará a las posibles palabras o grupo de palabras consecuentes.
+
+Referencias:
+https://setosa.io/ev/markov-chains/
 '''
 
 # Aqui puedes variar la pronunciación del español otras opciones son es-us o es-es
@@ -54,7 +63,7 @@ print('\n', tweet)
 salida = gTTS(text=tweet, lang=lang)
 salida.save('./markovid-19_primer_orden.wav')
 
-#### Markovid-19 de segundo orden ####
+#### Markovid-19 de tercer orden: adquiere un poco más de sentido lógico ####
 
 cadena = {}  
 n_words = len(palabras)  
@@ -80,3 +89,34 @@ print('\n', tweet)
 
 salida = gTTS(text=tweet, lang=lang)
 salida.save('./markovid-19_tercer_orden.wav')
+
+
+'''
+Fuentes de la base de datos
+
+fuentes: 
+
+http://documentos.bancomundial.org/curated/es/360641469672178646/text/323020SPANISH0Handwashing.txt
+
+https://www.who.int/es/emergencies/diseases/novel-coronavirus-2019/advice-for-public
+
+https://elpais.com/ideas/2020-03-21/la-emergencia-viral-y-el-mundo-de-manana-byung-chul-han-el-filosofo-surcoreano-que-piensa-desde-berlin.html
+
+https://elpais.com/especiales/2020/coronavirus-covid-19/predicciones/se-buscan-parejas-estables/
+
+https://elpais.com/especiales/2020/coronavirus-covid-19/predicciones/organicemos-una-forma-de-vida-mas-modesta/
+
+https://elpais.com/especiales/2020/coronavirus-covid-19/predicciones/el-aislamiento-puede-ser-creativo/
+
+https://www.marca.com/claro-mx/trending/2020/05/01/5eababca22601d200e8b4578.html
+
+https://elpais.com/america/sociedad/2020-05-03/coronavirus-en-america-ultimas-noticias-de-la-covid-19-en-vivo.html
+
+https://www.clinicbarcelona.org/noticias/el-antiviral-remdesivir-muestra-eficacia-para-reducir-el-tiempo-de-recuperacion-de-pacientes-con-covid-19
+
+https://www.clinicbarcelona.org/noticias/un-estudio-del-hospital-clinic-idibaps-y-el-csic-busca-predecir-la-gravedad-de-la-infeccion-por-el-sars-cov-2
+
+http://www.sepsiq.org/file/InformacionSM/SEP%20COVID19-Salud%20Mental%20Cuarentena.pdf
+
+https://www.rankiapro.com/covid-19-vs-gran-depresion-1929-diferencias-similitudes/
+'''
